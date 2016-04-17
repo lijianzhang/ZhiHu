@@ -9,10 +9,11 @@
 #import "MainViewController.h"
 #import "LeftMenuViewController.h"
 #import "ContentViewController.h"
+#import "SectionTitleView.h"
 
 
 #define VIEWWITH [UIScreen mainScreen].bounds.size.width
-#define LEFTMENUWITH VIEWWITH*2/5.0
+#define LEFTMENUWITH VIEWWITH*3/5.0
 static CGFloat const animateTime = 0.3;
 static CGFloat const deviation = 70;
 static BOOL isShow = NO;
@@ -31,11 +32,21 @@ typedef NS_ENUM(NSUInteger, MenuState)
 @property (nonatomic, weak)UIView *contentView;
 @property (nonatomic, assign)MenuState menuState;
 @property (nonatomic, strong)UIGestureRecognizer *tap;
+@property (nonatomic,strong)UIView *markView;
 @end
 
 @implementation MainViewController
 - (UIStatusBarStyle)preferredStatusBarStyle {
     return UIStatusBarStyleLightContent;
+}
+
+-(UIView *)markView{
+    if (!_markView) {
+        _markView = [[UIView alloc]initWithFrame:self.contentView.bounds];
+        _markView.backgroundColor = [UIColor blackColor];
+        _markView.alpha = 0.3;
+    }
+    return _markView;
 }
 
 - (UIGestureRecognizer *)tap{
@@ -49,7 +60,13 @@ typedef NS_ENUM(NSUInteger, MenuState)
     self.navigationController.navigationBarHidden = YES;
     [self setUpGestureRecognizer];
     self.menuLeading.constant = -LEFTMENUWITH;
+    
 
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 }
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -72,7 +89,7 @@ typedef NS_ENUM(NSUInteger, MenuState)
 
 
 - (IBAction)showLeftMenu:(id)sender {
-    [self showMenu];
+    isShow?[self hideMenu]:[self showMenu];
 }
 
 
@@ -121,7 +138,9 @@ typedef NS_ENUM(NSUInteger, MenuState)
                     [self.view layoutIfNeeded];
                 }];
             }
-            self.menuState==MenurStateOpen?[self menuOpen]:[self menuClose];
+//            if(self.menuState == MenurStateOpen || self.menuState == MenuStateClosed){
+                self.menuState==MenurStateOpen?[self menuOpen]:[self menuClose];
+//            }
             break;
         default:
             break;
@@ -131,10 +150,15 @@ typedef NS_ENUM(NSUInteger, MenuState)
 }
 
 -(void)menuOpen{
-    [self.contentView addGestureRecognizer:self.tap];
+//   [self.contentView addSubview:[[UIView alloc]initWithFrame:self.contentView.bounds]];
+    [self.contentView addSubview:self.markView];
+    [self.markView addGestureRecognizer:self.tap];
+
 }
 - (void)menuClose{
-    [self.contentView removeGestureRecognizer:self.tap];
+////    [self.contentView removeGestureRecognizer:self.tap];
+    [self.markView removeGestureRecognizer:self.tap];
+    [self.markView removeFromSuperview];
 }
 #pragma mark 导航代理
 -(void)showMenu{
@@ -143,6 +167,7 @@ typedef NS_ENUM(NSUInteger, MenuState)
         [self.view layoutIfNeeded];
 
     } completion:^(BOOL finished) {
+        [self menuOpen];
         isShow = !isShow;
 
     }];
@@ -154,6 +179,7 @@ typedef NS_ENUM(NSUInteger, MenuState)
     [UIView animateWithDuration:animateTime animations:^{
         [self.view layoutIfNeeded];
     } completion:^(BOOL finished) {
+        [self menuClose];
         isShow = !isShow;
     }];
 }

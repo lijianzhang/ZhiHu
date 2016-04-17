@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoryModel.h"
 
-@interface topStorysView : UIScrollView
-- (void)setImageWithNumber:(NSInteger)number andImageUrl:(NSString *)url;
+@interface topStorysView : UIView
+@property (nonatomic,strong)UIScrollView *scrollView;
+
+-(void)CreateData:(NSArray<StoryModel *> *)datas;
+-(void)updateFrame;
 @end

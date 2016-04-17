@@ -10,9 +10,7 @@
 
 @interface UIColor (JZ)
 + (instancetype)colorWithRed:(CGFloat)red Green:(CGFloat)green Blue:(CGFloat)blue;/**< 输入0-255 */
-+ (instancetype)colorWithNavLight;
-+ (instancetype)colorWithNavDark;
-+ (instancetype)colorWithbackgroudLight;
-+ (instancetype)colorWithbackgroudDark;
++ (instancetype)colorWithNav;
++ (instancetype)colorWithbackgroud;
 + (instancetype)colorWithFontDark;
 @end

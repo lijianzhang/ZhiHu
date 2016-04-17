@@ -7,10 +7,12 @@
 //
 
 #import "RequestTool.h"
-
-static NSString * const Themes = @"https://news-at.zhihu.com/api/4/themes";/**< 主题日报列表URL */
-static NSString * const LatestNews = @"https://news-at.zhihu.com/api/4/news/latest";
-
+#import <UIKit/UIKit.h>
+static NSString * const Themes = @"http://news-at.zhihu.com/api/4/themes";/**< 主题日报列表URL */
+static NSString * const LatestNews = @"http://news-at.zhihu.com/api/4/news/latest";
+static NSString * const OldNews = @"http://news.at.zhihu.com/api/4/news/before/%@";
+static NSString * const new = @"http://news-at.zhihu.com/api/4/news/%@";
+static NSString * const LaunchImage = @"http://news-at.zhihu.com/api/4/start-image/1080*1776";
 @interface RequestTool()
 @property(nonatomic,strong,nonnull) NSURLSession *session;
 @end
@@ -63,5 +65,45 @@ static NSString * const LatestNews = @"https://news-at.zhihu.com/api/4/news/late
         }
     }] resume];
 }
+-(void)getOldNewsBefone:(NSString*) time WithSuccess:(success)success andfail:(fail)fail{
+    NSString *url = [NSString stringWithFormat:OldNews,time];
+    [self JZRequestWithURLString:url Success:^(id requestData) {
+        success(requestData);
+    } andFial:^(NSError *error) {
+        fail(error);
+    }];
+}
 
+- (void)getNewWithNewId:(NSNumber *)newId AndSuccess:(success)success andFail:(fail)fail{
+    NSString *url = [NSString stringWithFormat:new,newId];
+    [self JZRequestWithURLString:url Success:^(id requestData) {
+        success(requestData);
+    } andFial:^(NSError *error) {
+        fail(error);
+    }];
+}
+- (void)getLaunchImageWihtSuccess:(success)success andFail:(fail)fail{
+    [self JZRequestWithURLString:LaunchImage Success:^(id requestData) {
+        success(requestData);
+    } andFial:^(NSError *error) {
+        fail(error);
+    }];
+}
+
+- (void)JZRequestWithURLString:(NSString*)urlString Success:(success)success andFial:(fail)fail{
+    NSURL *url = [NSURL URLWithString:urlString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+     [UIApplication sharedApplication].networkActivityIndicatorVisible = true;
+    [[self.session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = false;
+
+        if (error) {
+            fail(error);
+
+        }else{
+            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSUTF8StringEncoding error:nil];
+            success(dict);
+        }
+    }]resume];
+}
 @end

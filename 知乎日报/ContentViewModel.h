@@ -12,6 +12,11 @@
 typedef void(^update)();
 @interface ContentViewModel : NSObject
 @property(nonatomic,strong,readonly)NSArray<StoryModel*> *topStorys;/**<热门消息 */
-@property(nonatomic,strong,readonly)NSArray<StoryModel*> *Storys;/**<热门消息 */
+@property(nonatomic,strong)NSMutableArray<NSArray<StoryModel*>*> *Storys;/**<消息 */
+@property(nonatomic,strong)NSMutableArray *dayList;/**<<#text#> */
+@property(nonatomic,assign,getter=isLoding)BOOL loding;
 - (instancetype)initWithDataLoadSuccess:(update)updateData;
+-(void)getOldNewsWithSuccess:(update)updateData;
+
+
 @end

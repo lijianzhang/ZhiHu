@@ -7,6 +7,9 @@
 //
 
 #import "AppDelegate.h"
+#import "UIImageView+WebCache.h"
+#import "RequestTool.h"
+#import "JZNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -15,10 +18,48 @@
 @implementation AppDelegate
 
 
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    JZNavigationController *navigationController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"JZNavigationController"];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+    NSUserDefaults *users = [NSUserDefaults standardUserDefaults];
+    [users setBool:YES forKey:@"Theme"];
+    [users synchronize];
+    [self setLaunchScreen];
     return YES;
+}
+
+- (void)setLaunchScreen{
+
+    UIImageView *two = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window addSubview:two];
+    two.contentMode = UIViewContentModeScaleAspectFill;
+    UIImageView *one = [[UIImageView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [self.window addSubview:one];
+    one.image = [UIImage imageNamed:@"Default"];
+
+
+    [[RequestTool shardRequest]getLaunchImageWihtSuccess:^(id requestData) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            NSString *url = requestData[@"img"];
+            [two sd_setImageWithURL:[NSURL URLWithString:url]];
+            [UIView animateWithDuration:2.0f animations:^{
+                one.alpha = 0;
+                two.transform = CGAffineTransformMakeScale(1.2, 1.2);
+            }completion:^(BOOL finished) {
+                [one removeFromSuperview];
+                [two removeFromSuperview];
+            }];
+        });
+        
+    } andFail:nil];
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

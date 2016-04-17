@@ -17,4 +17,7 @@ typedef void(^fail)(NSError *error);
 
 -(void)getThemesWithSuccess:(success)success andfail:(fail)fail;
 -(void)getLatestNewsWithSuccess:(success)success andfail:(fail)fail;
+-(void)getOldNewsBefone:(NSString*) time WithSuccess:(success)success andfail:(fail)fail;
+- (void)getNewWithNewId:(NSNumber *)newId AndSuccess:(success)success andFail:(fail)fail;
+- (void)getLaunchImageWihtSuccess:(success)success andFail:(fail)fail;
 @end

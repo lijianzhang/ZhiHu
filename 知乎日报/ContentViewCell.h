@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "StoryModel.h"
 
 @interface ContentViewCell : UITableViewCell
 
-
+- (void)ShowDataWIthModel:(StoryModel*)data;
 @end
