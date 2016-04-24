@@ -8,7 +8,6 @@
 
 #import "ContentViewModel.h"
 #import "StoryModel.h"
-
 @interface ContentViewModel ()
 @property(nonatomic,copy)NSString *time;
 @end
@@ -20,6 +19,7 @@
         self.loding = YES;
         _Storys = [NSMutableArray array];
         _dayList = [NSMutableArray array];
+        _storyIDs = [NSMutableArray array];
         [[RequestTool shardRequest]getLatestNewsWithSuccess:^(id data) {
             self.loding = NO;
             NSArray *topStorys = data[@"top_stories"];
@@ -38,6 +38,7 @@
             for (NSDictionary *Story in Storys) {
                 StoryModel *storyModel = [[StoryModel alloc]initWithDict:Story];
                 [StoryModels addObject:storyModel];
+                [self.storyIDs addObject:storyModel.storyID];
             }
             [self.Storys addObject:StoryModels];
             
@@ -62,6 +63,7 @@
         for (NSDictionary *Story in Storys) {
             StoryModel *storyModel = [[StoryModel alloc]initWithDict:Story];
             [StoryModels addObject:storyModel];
+            [self.storyIDs addObject:storyModel.storyID];
         }
         updateData();
         [self.Storys addObject:StoryModels];
@@ -81,5 +83,9 @@
     
     return sectionTitleText;
 }
+
+//- (StoryModel *)getStoryModelWithIndexPath:(NSIndexPath *)indexPath{
+////    _Storys[indexPath.section][indexPath.row];
+//}
 
 @end

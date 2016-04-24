@@ -17,8 +17,11 @@
 #import "RefreshView.h"
 #import "SectionTitleView.h"
 #import "JZNewsViewController.h"
+#import "NewsViewModel.h"
 
 #define VIEWWITH [UIScreen mainScreen].bounds.size.width
+#define VIEWHEIGHT [UIScreen mainScreen].bounds.size.height
+
 CGFloat const scrollImageHeigth = 400;
 CGFloat const ScrollViewHeight =250;
 CGFloat const ScrollViewTop = -50;
@@ -47,6 +50,12 @@ CGFloat const rowItemHeigth = 88;
             [self.contentTableView reloadData];
         });
     }];
+    self.topStorysView.block = ^(NSInteger index){
+        NewsViewModel *model = [[NewsViewModel alloc]initWithStroyID:self.ViewModel.topStorys[index].storyID];
+        model.storyIDs = self.ViewModel.storyIDs;
+        JZNewsViewController *vc = [[JZNewsViewController alloc]initWithNewsViewModel:model];
+        [self.navigationController pushViewController:vc animated:YES];
+    };
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(changeColor) name:@"ThemeColorChange" object:nil];
     
 }
@@ -92,7 +101,6 @@ CGFloat const rowItemHeigth = 88;
                     dispatch_async(dispatch_get_main_queue(), ^{
 
                         [self.contentTableView reloadData];
-                        NSLog(@"刷新成功");
                     });
                 }];
             }
@@ -101,7 +109,6 @@ CGFloat const rowItemHeigth = 88;
 }
 
 - (void)changeColor{
-    NSLog(@"changeColor");
     [UIView animateWithDuration:0.3f animations:^{
         self.navBar.backgroundColor = [UIColor colorWithNav];
         [self abc:self.contentTableView];
@@ -168,6 +175,7 @@ CGFloat const rowItemHeigth = 88;
     if (section == 0) {
         self.navbarHeight.constant = 56;
         self.homeTitle.alpha = 1.f;
+        
     }
 }
 
@@ -178,10 +186,10 @@ CGFloat const rowItemHeigth = 88;
     }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-//    JZNewsViewController *vc = [[UIStoryboard storyboardWithName:@"Main" bundle:nil]instantiateViewControllerWithIdentifier:@"JZNewsViewController"];
-    JZNewsViewController *vc = [[JZNewsViewController alloc]init];
-    vc.stroyId = self.ViewModel.Storys[indexPath.section][indexPath.row].storyID;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{    
+    NewsViewModel *model = [[NewsViewModel alloc]initWithStroyID:self.ViewModel.Storys[indexPath.section][indexPath.row].storyID];
+    model.storyIDs = self.ViewModel.storyIDs;
+    JZNewsViewController *vc = [[JZNewsViewController alloc]initWithNewsViewModel:model];
     [self.navigationController pushViewController:vc animated:YES];
     
 }

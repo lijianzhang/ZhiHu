@@ -68,7 +68,6 @@ static  NSString * const Identifier = @"themeCell";
 - (IBAction)changeThemeColor:(id)sender {
     NSUserDefaults *users = [NSUserDefaults standardUserDefaults];
     BOOL isLight = [users boolForKey:@"Theme"];
-    NSLog(@"%d",isLight);
     [users setBool:!isLight forKey:@"Theme"];
     [[NSNotificationCenter defaultCenter]postNotificationName:@"ThemeColorChange" object:nil];
 }

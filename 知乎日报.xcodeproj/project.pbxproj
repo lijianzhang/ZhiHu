@@ -15,6 +15,7 @@
 		2A727EAC1CC27B0300774510 /* NewsHeadView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A727EAB1CC27B0300774510 /* NewsHeadView.xib */; };
 		2A727EAF1CC27BA000774510 /* NewsHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A727EAE1CC27BA000774510 /* NewsHeadView.m */; };
 		2A727EB21CC2995700774510 /* JZNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A727EB11CC2995700774510 /* JZNavigationController.m */; };
+		2A727EB91CC328DF00774510 /* NewsViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A727EB81CC328DF00774510 /* NewsViewModel.m */; };
 		2A8EA5301CB788100055936D /* LeftMenuViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EA52F1CB788100055936D /* LeftMenuViewModel.m */; };
 		2A8EA5331CB795300055936D /* ThemeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EA5321CB795300055936D /* ThemeCell.m */; };
 		2A8EA5371CB7A7190055936D /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A8EA5361CB7A7190055936D /* MainViewController.m */; };
@@ -73,6 +74,8 @@
 		2A727EAE1CC27BA000774510 /* NewsHeadView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsHeadView.m; sourceTree = "<group>"; };
 		2A727EB01CC2995700774510 /* JZNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZNavigationController.h; sourceTree = "<group>"; };
 		2A727EB11CC2995700774510 /* JZNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZNavigationController.m; sourceTree = "<group>"; };
+		2A727EB71CC328DF00774510 /* NewsViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewModel.h; sourceTree = "<group>"; };
+		2A727EB81CC328DF00774510 /* NewsViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewModel.m; sourceTree = "<group>"; };
 		2A8EA52E1CB788100055936D /* LeftMenuViewModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LeftMenuViewModel.h; sourceTree = "<group>"; };
 		2A8EA52F1CB788100055936D /* LeftMenuViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LeftMenuViewModel.m; sourceTree = "<group>"; };
 		2A8EA5311CB795300055936D /* ThemeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeCell.h; sourceTree = "<group>"; };
@@ -88,6 +91,7 @@
 		2A90DE571CB842C500E2E00F /* ContentViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContentViewModel.m; sourceTree = "<group>"; };
 		2A90DE5A1CB8434F00E2E00F /* StoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryModel.h; sourceTree = "<group>"; };
 		2A90DE5B1CB8434F00E2E00F /* StoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryModel.m; sourceTree = "<group>"; };
+		2AA79B941CCA95AD0062BBA4 /* Reveal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reveal.framework; path = "../../../../Applications/Reveal.app/Contents/SharedSupport/iOS-Libraries/Reveal.framework"; sourceTree = "<group>"; };
 		2AAC33371CB94A03004DF895 /* RefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RefreshView.h; sourceTree = "<group>"; };
 		2AAC33381CB94A03004DF895 /* RefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RefreshView.m; sourceTree = "<group>"; };
 		2AAC333A1CB97A92004DF895 /* SectionTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionTitleView.h; sourceTree = "<group>"; };
@@ -153,7 +157,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		2A8EA5341CB7A6F10055936D /* Main */ = {
+		2A727EB31CC3243B00774510 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		2A727EB41CC3244000774510 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				2A8EA5351CB7A7190055936D /* MainViewController.h */,
@@ -161,12 +172,42 @@
 				2A727EB01CC2995700774510 /* JZNavigationController.h */,
 				2A727EB11CC2995700774510 /* JZNavigationController.m */,
 			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2A727EB51CC3245900774510 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2AD1C03E1CB7653500CC3F21 /* LeftMenuViewController.h */,
+				2AD1C03F1CB7653500CC3F21 /* LeftMenuViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2A727EB61CC324AF00774510 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				2A8EA5401CB7BED10055936D /* ContentViewController.h */,
+				2A8EA5411CB7BED10055936D /* ContentViewController.m */,
+				2A1338CA1CC1F2F8005A2747 /* JZNewsViewController.h */,
+				2A1338CB1CC1F2F8005A2747 /* JZNewsViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		2A8EA5341CB7A6F10055936D /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2A727EB41CC3244000774510 /* Controller */,
+				2A727EB31CC3243B00774510 /* View */,
+			);
 			name = Main;
 			sourceTree = "<group>";
 		};
 		2A8EA53F1CB7BEB00055936D /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2A727EB61CC324AF00774510 /* Controller */,
 				2A90DE591CB8431E00E2E00F /* Model */,
 				2A90DE551CB842A400E2E00F /* ViewModel */,
 				2A90DE511CB832D000E2E00F /* View */,
@@ -177,8 +218,6 @@
 		2A90DE511CB832D000E2E00F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2A8EA5401CB7BED10055936D /* ContentViewController.h */,
-				2A8EA5411CB7BED10055936D /* ContentViewController.m */,
 				2A319DBD1CB85B70001689B6 /* ContentViewCell.h */,
 				2A319DBE1CB85B70001689B6 /* ContentViewCell.m */,
 				2A319DC91CB8AD42001689B6 /* topStorysView.h */,
@@ -187,8 +226,6 @@
 				2AAC33381CB94A03004DF895 /* RefreshView.m */,
 				2AAC333A1CB97A92004DF895 /* SectionTitleView.h */,
 				2AAC333B1CB97A92004DF895 /* SectionTitleView.m */,
-				2A1338CA1CC1F2F8005A2747 /* JZNewsViewController.h */,
-				2A1338CB1CC1F2F8005A2747 /* JZNewsViewController.m */,
 				2A727EAB1CC27B0300774510 /* NewsHeadView.xib */,
 				2A727EAD1CC27BA000774510 /* NewsHeadView.h */,
 				2A727EAE1CC27BA000774510 /* NewsHeadView.m */,
@@ -201,6 +238,8 @@
 			children = (
 				2A90DE561CB842C500E2E00F /* ContentViewModel.h */,
 				2A90DE571CB842C500E2E00F /* ContentViewModel.m */,
+				2A727EB71CC328DF00774510 /* NewsViewModel.h */,
+				2A727EB81CC328DF00774510 /* NewsViewModel.m */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -308,6 +347,7 @@
 		2AD1C03D1CB7650F00CC3F21 /* LeftMenu */ = {
 			isa = PBXGroup;
 			children = (
+				2A727EB51CC3245900774510 /* Controller */,
 				2AD1C0431CB773F700CC3F21 /* Model */,
 				2AD1C0421CB773E000CC3F21 /* ViewModel */,
 				2AD1C0411CB773D700CC3F21 /* View */,
@@ -318,8 +358,6 @@
 		2AD1C0411CB773D700CC3F21 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2AD1C03E1CB7653500CC3F21 /* LeftMenuViewController.h */,
-				2AD1C03F1CB7653500CC3F21 /* LeftMenuViewController.m */,
 				2A8EA5311CB795300055936D /* ThemeCell.h */,
 				2A8EA5321CB795300055936D /* ThemeCell.m */,
 			);
@@ -356,6 +394,7 @@
 		E92EF2019FE7D7B596E6077E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2AA79B941CCA95AD0062BBA4 /* Reveal.framework */,
 				3F29856794AF1E673EC60163 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -554,6 +593,7 @@
 				2AAC33391CB94A03004DF895 /* RefreshView.m in Sources */,
 				2A8EA5331CB795300055936D /* ThemeCell.m in Sources */,
 				2AD1C04A1CB77D8300CC3F21 /* RequestTool.m in Sources */,
+				2A727EB91CC328DF00774510 /* NewsViewModel.m in Sources */,
 				2A1338CC1CC1F2F8005A2747 /* JZNewsViewController.m in Sources */,
 				2AD1C03C1CB758ED00CC3F21 /* UIImageView+JZ.m in Sources */,
 				2A8EA5371CB7A7190055936D /* MainViewController.m in Sources */,
@@ -708,10 +748,19 @@
 			baseConfigurationReference = AD1B9A95B1DD5C66B142435A /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "知乎日报/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"SDWebImage\"",
+					"-framework",
+					"\"ImageIO\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jz.oc.----";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -723,10 +772,19 @@
 			baseConfigurationReference = 1EB6C4973CDF48D2D24F9B80 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "知乎日报/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"SDWebImage\"",
+					"-framework",
+					"\"ImageIO\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.Jz.oc.----";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;

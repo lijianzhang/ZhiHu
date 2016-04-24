@@ -72,14 +72,19 @@ IB_DESIGNABLE
     for (int i=0; i<self.topStorys.count; i++) {
         UIImageView *imageView = [[UIImageView alloc]initWithFrame:CGRectMake(i*VIEWSIZE.width, 0, VIEWSIZE.width, ImageHeigth)];
         [self.images addObject:imageView];
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(selectImage:)];
+        [imageView addGestureRecognizer:tap];
+        imageView.userInteractionEnabled = YES;
         imageView.image = [UIImage imageNamed:@"bizhi.jpg"];
+        imageView.tag = 100+i;
         [self.scrollView addSubview:imageView];
-
+        
         UILabel *title =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, VIEWSIZE.width-20, 30)];
         title.numberOfLines = 0;
         title.center = CGPointMake(VIEWSIZE.width/2 + i*VIEWSIZE.width, self.h - 60);
         [self.titles addObject:title];
         [self.scrollView addSubview:title];
+        
     }
     return _scrollView;
 }
@@ -152,6 +157,7 @@ IB_DESIGNABLE
 
 - (void)setdataWithPageNumber:(NSInteger)number andDataNumber:(NSInteger)dataNumber{
     [self.images[number] sd_setImageWithURL:[NSURL URLWithString:self.topStorys[dataNumber].image]];
+    self.images[number].tag = 100 + dataNumber;
     NSAttributedString *attStr = [[NSAttributedString alloc] initWithString:self.topStorys[dataNumber].title attributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:21],NSForegroundColorAttributeName:[UIColor whiteColor]}];
     CGSize size =  [attStr boundingRectWithSize:CGSizeMake(VIEWSIZE.width-30, 200) options:NSStringDrawingUsesLineFragmentOrigin|NSStringDrawingUsesFontLeading context:nil].size;
     self.titles[number].attributedText =attStr;
@@ -169,6 +175,14 @@ IB_DESIGNABLE
         [self updateDataWithPageNumber:self.numberOfPage andIsAnimated:NO];
     }];
 
+}
+
+- (void)selectImage:(UITapGestureRecognizer *)tapGesture{
+    UIImageView *image = (UIImageView *)tapGesture.view;
+    NSUInteger index= image.tag-100;
+    if (self.block) {
+        self.block(index);
+    }
 }
 
 @end

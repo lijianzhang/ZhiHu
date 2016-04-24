@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@class NewsViewModel;
 @interface JZNewsViewController : UIViewController
-@property(nonatomic,strong)NSNumber *stroyId;/**<<#text#> */
+
+-(instancetype)initWithNewsViewModel:(NewsViewModel*) newsViewModle;
 @end

@@ -8,10 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "StoryModel.h"
+typedef void(^selectImageViewNumber)(NSInteger index);
 
 @interface topStorysView : UIView
 @property (nonatomic,strong)UIScrollView *scrollView;
-
+@property(nonatomic,copy)selectImageViewNumber block;
 -(void)CreateData:(NSArray<StoryModel *> *)datas;
 -(void)updateFrame;
 @end

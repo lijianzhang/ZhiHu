@@ -171,7 +171,6 @@ typedef NS_ENUM(NSUInteger, MenuState)
         isShow = !isShow;
 
     }];
-    NSLog(@"%d",isShow);
 }
 
 -(void)hideMenu{

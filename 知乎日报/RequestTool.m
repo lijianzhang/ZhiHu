@@ -13,6 +13,7 @@ static NSString * const LatestNews = @"http://news-at.zhihu.com/api/4/news/lates
 static NSString * const OldNews = @"http://news.at.zhihu.com/api/4/news/before/%@";
 static NSString * const new = @"http://news-at.zhihu.com/api/4/news/%@";
 static NSString * const LaunchImage = @"http://news-at.zhihu.com/api/4/start-image/1080*1776";
+static NSString *const beforeNews =@"http://news-at.zhihu.com/api/4/theme/11/before/7196600";
 @interface RequestTool()
 @property(nonatomic,strong,nonnull) NSURLSession *session;
 @end
@@ -83,6 +84,14 @@ static NSString * const LaunchImage = @"http://news-at.zhihu.com/api/4/start-ima
     }];
 }
 - (void)getLaunchImageWihtSuccess:(success)success andFail:(fail)fail{
+    [self JZRequestWithURLString:LaunchImage Success:^(id requestData) {
+        success(requestData);
+    } andFial:^(NSError *error) {
+        fail(error);
+    }];
+}
+
+- (void)getBeforeThemeNewsWithLastId:(NSNumber *)number WihtSuccess:(success)success andFail:(fail)fail{
     [self JZRequestWithURLString:LaunchImage Success:^(id requestData) {
         success(requestData);
     } andFial:^(NSError *error) {

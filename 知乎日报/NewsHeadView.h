@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "newsModel.h"
+@class NewsViewModel;
+
+
 @interface NewsHeadView : UIView
-- (void)setDataWithModel:(id <newsModelData>)model;
+
+
+- (void)setDataWithModel:(NewsViewModel *)model;
+
 @end

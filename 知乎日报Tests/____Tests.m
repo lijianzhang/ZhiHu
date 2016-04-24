@@ -41,7 +41,6 @@
 
 - (void)testGetThemes{
     [[RequestTool shardRequest]getThemesWithSuccess:^(id requestData) {
-        NSLog(@"%@",requestData);
         XCTAssertNotNil(requestData,@"返回出错");
         [[NSNotificationCenter defaultCenter]postNotificationName:@"JZTest" object:nil];
     } andfail:^(NSError *error) {

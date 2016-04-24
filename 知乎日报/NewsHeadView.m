@@ -8,6 +8,7 @@
 
 #import "NewsHeadView.h"
 #import "UIImageView+WebCache.h"
+#import "NewsViewModel.h"
 
 @interface NewsHeadView ()
 @property (weak, nonatomic) IBOutlet UIImageView *headImageView;
@@ -40,12 +41,14 @@
     return self;
 }
 
-- (void)setDataWithModel:(id <newsModelData>)model{
-    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:[model newsHeadIamge]]];
-//    self.title.text = [model newsHeadtitle];
-    [self.title setText:[model newsHeadtitle]];
-    self.source.text = [model newsHeadIamgesource];
-    [self layoutIfNeeded];
+- (void)setDataWithModel:(NewsViewModel *)model{
+    [self.headImageView sd_setImageWithURL:[NSURL URLWithString:model.newsImage]];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.title.text = model.newsTitle;
+        self.source.text = model.newsImageSource;
+        [self layoutIfNeeded];
+    });
+
 }
 /*
 // Only override drawRect: if you perform custom drawing.
